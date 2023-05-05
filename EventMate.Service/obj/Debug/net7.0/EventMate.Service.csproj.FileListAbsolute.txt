@@ -1,0 +1,17 @@
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\bin\Debug\net7.0\EventMate.Service.deps.json
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\bin\Debug\net7.0\EventMate.Service.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\bin\Debug\net7.0\EventMate.Service.pdb
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\bin\Debug\net7.0\EventMate.Core.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\bin\Debug\net7.0\EventMate.Repository.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\bin\Debug\net7.0\EventMate.Repository.pdb
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\bin\Debug\net7.0\EventMate.Core.pdb
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\obj\Debug\net7.0\EventMate.Service.csproj.AssemblyReference.cache
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\obj\Debug\net7.0\EventMate.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\obj\Debug\net7.0\EventMate.Service.AssemblyInfoInputs.cache
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\obj\Debug\net7.0\EventMate.Service.AssemblyInfo.cs
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\obj\Debug\net7.0\EventMate.Service.csproj.CoreCompileInputs.cache
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\obj\Debug\net7.0\EventMate.Service.csproj.CopyComplete
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\obj\Debug\net7.0\EventMate.Service.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\obj\Debug\net7.0\refint\EventMate.Service.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\obj\Debug\net7.0\EventMate.Service.pdb
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Service\obj\Debug\net7.0\ref\EventMate.Service.dll

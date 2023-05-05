@@ -1,0 +1,15 @@
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\bin\Debug\net7.0\EventMate.Repository.deps.json
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\bin\Debug\net7.0\EventMate.Repository.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\bin\Debug\net7.0\EventMate.Repository.pdb
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\bin\Debug\net7.0\EventMate.Core.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\bin\Debug\net7.0\EventMate.Core.pdb
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\EventMate.Repository.csproj.AssemblyReference.cache
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\EventMate.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\EventMate.Repository.AssemblyInfoInputs.cache
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\EventMate.Repository.AssemblyInfo.cs
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\EventMate.Repository.csproj.CoreCompileInputs.cache
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\EventMate.Repository.csproj.CopyComplete
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\EventMate.Repository.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\refint\EventMate.Repository.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\EventMate.Repository.pdb
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\ref\EventMate.Repository.dll
