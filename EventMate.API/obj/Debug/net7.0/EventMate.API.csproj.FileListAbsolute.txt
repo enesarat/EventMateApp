@@ -80,3 +80,5 @@ C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\Microsoft
 C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\Mono.TextTemplating.dll
 C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\System.CodeDom.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

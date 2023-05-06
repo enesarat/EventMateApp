@@ -12,7 +12,7 @@ namespace EventMate.Core.Service
     {
         Task<T> GetByIdAsync(int id);
         Task<IEnumerable<T>> GetAllAsync();
-        IQueryable<T> Where(Expression<Func<T, bool>> expression);
+        Task<IQueryable<T>> WhereAsync(Expression<Func<T, bool>> expression);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);

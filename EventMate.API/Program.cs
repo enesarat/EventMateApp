@@ -1,8 +1,10 @@
 using EventMate.Core.Repository;
+using EventMate.Core.Service;
 using EventMate.Core.UnitOfWork;
 using EventMate.Repository.Context;
 using EventMate.Repository.Repository;
 using EventMate.Repository.UnitOfWork;
+using EventMate.Service.Mapper;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -24,6 +26,8 @@ builder.Services.AddScoped(typeof(IRoleRepository), typeof(RoleRepository));
 builder.Services.AddScoped(typeof(ITicketRepository), typeof(TicketRepository));
 builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 
+builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericServcie<>));
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddDbContext<ApplicationDbContext>(x =>
 {
