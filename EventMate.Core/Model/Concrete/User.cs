@@ -16,6 +16,8 @@ namespace EventMate.Core.Model.Concrete
         public int RoleId { get; set; }
         public Role Role { get; set; }
         public ICollection<Ticket> Tickets { get; set; }
-
+        public DateTime? LastActivity { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpireDate { get; set; }
     }
 }
