@@ -13,3 +13,5 @@ C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\Ev
 C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\refint\EventMate.Repository.dll
 C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\EventMate.Repository.pdb
 C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\ref\EventMate.Repository.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\bin\Debug\net7.0\EventMate.Repository.runtimeconfig.json
+C:\Users\Enes\source\repos\EventMateApp\EventMate.Repository\obj\Debug\net7.0\EventMate.Repository.genruntimeconfig.cache
