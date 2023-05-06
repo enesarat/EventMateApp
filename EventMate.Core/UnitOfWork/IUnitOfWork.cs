@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EventMate.Core.UnitOfWork
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
         Task CommitAsync();
         void Commit();
