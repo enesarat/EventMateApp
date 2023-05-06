@@ -14,8 +14,8 @@ namespace EventMate.Repository.DataSeed
         {
             builder.HasData(
                 new Role { Id = 1, Name = "Admin", CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true},
-                new Role { Id = 1, Name = "Personnel", CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true },
-                new Role { Id = 1, Name = "Paticipant", CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true }
+                new Role { Id = 2, Name = "Personnel", CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true },
+                new Role { Id = 3, Name = "Paticipant", CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true }
               );
         }
     }
