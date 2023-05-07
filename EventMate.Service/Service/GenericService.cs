@@ -56,7 +56,7 @@ namespace EventMate.Service.Service
             {
                 return entity;
             }
-            throw new Exception($"{typeof(T).Name} ({id}) not found. Retrieve operation is not successfull. \"");
+            throw new Exception($"{typeof(T).Name} ({id}) not found. Retrieve operation is not successfull. ");
         }
 
         public async Task UpdateAsync(T entity)

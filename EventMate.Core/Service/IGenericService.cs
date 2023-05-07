@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EventMate.Core.Service
 {
-    public interface IGenericService<T> where T : class
+    public interface IGenericService<T> where T : BaseModel
     {
         Task<T> GetByIdAsync(int id);
         Task<IEnumerable<T>> GetAllAsync();
