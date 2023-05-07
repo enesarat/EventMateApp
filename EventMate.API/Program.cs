@@ -1,4 +1,5 @@
 using EventMate.API.Filters;
+using EventMate.API.Middlewares;
 using EventMate.Core.Repository;
 using EventMate.Core.Service;
 using EventMate.Core.UnitOfWork;
@@ -64,6 +65,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCustomException();
 
 app.UseAuthorization();
 

@@ -1,4 +1,5 @@
 ﻿using EventMate.Core.Model.Concrete;
+using EventMate.Core.Repository;
 using EventMate.Core.Service;
 using EventMate.Core.UnitOfWork;
 using System;
@@ -10,59 +11,23 @@ using System.Threading.Tasks;
 
 namespace EventMate.Service.Service
 {
-    public class CategoryService : ICategoryService
+    public class CategoryService : GenericService<Category>, ICategoryService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryService(IUnitOfWork unitOfWork)
+        public CategoryService(IGenericRepository<Category> repository, IUnitOfWork unitOfWork, ICategoryRepository categoryRepository) : base(repository, unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task AddAsync(Category item)
         {
             item.CreatedDate = DateTime.Now;
             item.CreatedBy = "SystemUser";
-            await _unitOfWork.CategoryRepository.AddAsync(item);
+            await _categoryRepository.AddAsync(item);
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task<bool> AnyAsync(Expression<Func<Category, bool>> expression)
-        {
-            var status = await _unitOfWork.CategoryRepository.AnyAsync(expression);
-            return status;
-        }
-
-        public async Task DeleteAsync(int id)
-        {
-            var item =_unitOfWork.CategoryRepository.GetByIdAsync(id).Result;
-            _unitOfWork.CategoryRepository.Delete(item);
-            await _unitOfWork.CommitAsync();
-        }
-
-        public async Task<IEnumerable<Category>> GetAllAsync()
-        {
-            var itemList = await _unitOfWork.CategoryRepository.GetAllAsync();
-            return itemList;
-        }
-
-        public async Task<Category> GetByIdAsync(int id)
-        {
-            var item = await _unitOfWork.CategoryRepository.GetByIdAsync(id);
-            return item;
-        }
-
-        public async Task UpdateAsync(Category item)
-        {
-            item.UpdatedDate = DateTime.Now;
-            _unitOfWork.CategoryRepository.Update(item);
-            await _unitOfWork.CommitAsync();
-        }
-
-        public Task<IQueryable<Category>> WhereAsync(Expression<Func<Category, bool>> expression)
-        {
-            var result = _unitOfWork.CategoryRepository.Where(expression);
-            return (Task<IQueryable<Category>>)result;
-        }
+        
     }
 }

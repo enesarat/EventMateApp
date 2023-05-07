@@ -2,6 +2,7 @@
 using EventMate.Core.Repository;
 using EventMate.Core.Service;
 using EventMate.Core.UnitOfWork;
+using EventMate.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace EventMate.Service.Service
     public class GenericService<T> : IGenericService<T> where T : BaseModel
     {
         private readonly IGenericRepository<T> _repository;
-        private readonly IUnitOfWork _unitOfWork;
+        protected readonly IUnitOfWork _unitOfWork;
         public GenericService(IGenericRepository<T> repository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
@@ -52,11 +53,12 @@ namespace EventMate.Service.Service
         public async Task<T> GetByIdAsync(int id)
         {
             var entity = await _repository.GetByIdAsync(id);
-            if (entity.IsActive != false)
+            
+            if (entity != null && entity.IsActive != false)
             {
                 return entity;
             }
-            throw new Exception($"{typeof(T).Name} ({id}) not found. Retrieve operation is not successfull. ");
+            throw new NotFoundException($"{typeof(T).Name} ({id}) not found. Retrieve operation is not successfull. ");
         }
 
         public async Task UpdateAsync(T entity)
@@ -68,7 +70,7 @@ namespace EventMate.Service.Service
             }
             else
             {
-                throw new Exception($" {typeof(T)} ({entity.Id}) not found. Updete operation is not successfull. ");
+                throw new NotFoundException($" {typeof(T).Name} ({entity.Id}) not found. Updete operation is not successfull. ");
             }
         }
 
