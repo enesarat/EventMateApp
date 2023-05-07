@@ -85,3 +85,5 @@ C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\AutoMappe
 C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\FluentValidation.dll
 C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
 C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\Autofac.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\Autofac.Extensions.DependencyInjection.dll

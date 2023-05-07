@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "2zLZNI0nhqSfCwS9j0PaS93G5/VGsKyb3gCNeyUPoRTloplaE8474U7K2fXoWCNZsP4mKapLhr0VGfL/VXWXYQ==",
+  "dgSpecHash": "Wn3Hx3hPc8N+IFKbvsXQNfo83mZZU+4u/6QzGtnNKmsWsNOoA0A2LEzovnHBXabvaFl3vuP1PSDcJ5WgequGsQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Enes\\source\\repos\\EventMateApp\\EventMate.API\\EventMate.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Enes\\.nuget\\packages\\autofac\\6.4.0\\autofac.6.4.0.nupkg.sha512",
+    "C:\\Users\\Enes\\.nuget\\packages\\autofac.extensions.dependencyinjection\\8.0.0\\autofac.extensions.dependencyinjection.8.0.0.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",

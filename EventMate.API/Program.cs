@@ -1,5 +1,8 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using EventMate.API.Filters;
 using EventMate.API.Middlewares;
+using EventMate.API.Modules;
 using EventMate.Core.Repository;
 using EventMate.Core.Service;
 using EventMate.Core.UnitOfWork;
@@ -33,17 +36,19 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
-builder.Services.AddScoped(typeof(ICityRepository), typeof(CityRepository));
-builder.Services.AddScoped(typeof(IEventRepository), typeof(EventRepository));
-builder.Services.AddScoped(typeof(IRoleRepository), typeof(RoleRepository));
-builder.Services.AddScoped(typeof(ITicketRepository), typeof(TicketRepository));
-builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+#region Autofac Definition Sources
+//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+//builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
+//builder.Services.AddScoped(typeof(ICityRepository), typeof(CityRepository));
+//builder.Services.AddScoped(typeof(IEventRepository), typeof(EventRepository));
+//builder.Services.AddScoped(typeof(IRoleRepository), typeof(RoleRepository));
+//builder.Services.AddScoped(typeof(ITicketRepository), typeof(TicketRepository));
+//builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 
-builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericServcie<>));
-builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
+//builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericServcie<>));
+//builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
+#endregion
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -54,6 +59,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(x =>
         option.MigrationsAssembly(Assembly.GetAssembly(typeof(ApplicationDbContext)).GetName().Name);
     });
 });
+
+builder.Host.UseServiceProviderFactory
+    (new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepositoryAndServiceModule()));
+
 
 var app = builder.Build();
 

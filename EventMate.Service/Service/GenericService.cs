@@ -37,9 +37,16 @@ namespace EventMate.Service.Service
 
         public async Task DeleteAsync(int id)
         {
-            var entity = await _repository.GetByIdAsync(id);
-            _repository.Delete(entity);
-            await _unitOfWork.CommitAsync();
+            if (await _repository.AnyAsync(x => x.Id == id && x.IsActive == true))
+            {
+                var entity = await _repository.GetByIdAsync(id);
+                _repository.Delete(entity);
+                await _unitOfWork.CommitAsync();
+            }
+            else
+            {
+                throw new NotFoundException($" {typeof(T).Name} ({id}) not found. Updete operation is not successfull. ");
+            }
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
