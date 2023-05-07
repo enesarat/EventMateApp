@@ -10,61 +10,40 @@ namespace EventMate.API.Controllers
 {
     public class CategoryController : CustomBaseController
     {
-        private readonly IMapper _mapper;
         private readonly ICategoryService _service;
-        public CategoryController(IMapper mapper, ICategoryService service)
+        public CategoryController(ICategoryService service)
         {
-            _mapper = mapper;
             _service = service;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var catgory = await _service.GetByIdAsync(id);
-            var catgoryAsDto = _mapper.Map<CategoryDto>(catgory);
-
-            return CustomActionResult(CustomResponse<Category>.Success(200, catgory));
+            return CustomActionResult(await _service.GetByIdAsync(id));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var catgories = await _service.GetAllAsync();
-            var catgoriesAsDto = _mapper.Map<List<CategoryDto>>(catgories.ToList());
-
-            return CustomActionResult(CustomResponse<List<CategoryDto>>.Success(200, catgoriesAsDto));
+            return CustomActionResult(await _service.GetAllAsync());
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CategoryCreateDto categoryDto)
         {
-            var category = _mapper.Map<Category>(categoryDto);
-            await _service.AddAsync(category);
-
-            return CustomActionResult(CustomResponse<CategoryCreateDto>.Success(201, categoryDto));
+            return CustomActionResult(await _service.AddAsync(categoryDto));
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(CategoryUpdateDto categoryDto)
+        public async Task<IActionResult> Update([FromBody] CategoryUpdateDto categoryDto)
         {
-            var category = _mapper.Map<Category>(categoryDto);
-            await _service.UpdateAsync(category);
-
-            return CustomActionResult(CustomResponse<NoContentResponse>.Success(204));
+            return CustomActionResult(await _service.UpdateAsync(categoryDto));
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var category = _service.GetByIdAsync(id);
-            if(category == null)
-            {
-                return CustomActionResult(CustomResponse<NoContentResponse>.Fail(404, $"{typeof(Category).Name} ({id}) not found. Delete operation is not successfull. "));
-            }
-            await _service.DeleteAsync(id);
-
-            return CustomActionResult(CustomResponse<NoContentResponse>.Success(204));
+            return CustomActionResult(await _service.DeleteAsync(id));
         }
     }
 }

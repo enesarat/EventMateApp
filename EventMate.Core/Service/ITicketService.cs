@@ -1,4 +1,5 @@
-﻿using EventMate.Core.Model.Concrete;
+﻿using EventMate.Core.DTO.Concrete.Ticket;
+using EventMate.Core.Model.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EventMate.Core.Service
 {
-    public interface ITicketService : IGenericService<Ticket>
+    public interface ITicketService : IGenericService<Ticket,TicketDto>
     {
     }
 }

@@ -18,7 +18,7 @@ namespace EventMate.API.Modules
         {
 
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>)).InstancePerLifetimeScope();
-            builder.RegisterGeneric(typeof(GenericService<>)).As(typeof(IGenericService<>)).InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(GenericService<,>)).As(typeof(IGenericService<,>)).InstancePerLifetimeScope();
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
 

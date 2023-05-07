@@ -1,4 +1,5 @@
-﻿using EventMate.Core.Model.Abstract;
+﻿using EventMate.Core.DTO.Concrete.Response;
+using EventMate.Core.Model.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace EventMate.Core.Service
 {
-    public interface IGenericService<T> where T : BaseModel
+    public interface IGenericService<Entity,Dto> where Entity : BaseModel where Dto : class
     {
-        Task<T> GetByIdAsync(int id);
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<IQueryable<T>> WhereAsync(Expression<Func<T, bool>> expression);
-        Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
-        Task AddAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(int id);
+        Task<CustomResponse<Dto>> GetByIdAsync(int id);
+        Task<CustomResponse<IEnumerable<Dto>>> GetAllAsync();
+        Task<CustomResponse<IEnumerable<Dto>>> Where(Expression<Func<Entity, bool>> expression);
+        Task<CustomResponse<bool>> AnyAsync(Expression<Func<Entity, bool>> expression);
+        Task<CustomResponse<NoContentResponse>> AddAsync(Dto item);
+        Task<CustomResponse<NoContentResponse>> UpdateAsync(Dto item);
+        Task<CustomResponse<NoContentResponse>> DeleteAsync(int id);
     }
 }

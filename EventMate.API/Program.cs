@@ -12,6 +12,11 @@ using EventMate.Repository.UnitOfWork;
 using EventMate.Service.Mapper;
 using EventMate.Service.Service;
 using EventMate.Service.Validator.Category;
+using EventMate.Service.Validator.City;
+using EventMate.Service.Validator.Event;
+using EventMate.Service.Validator.Role;
+using EventMate.Service.Validator.Ticket;
+using EventMate.Service.Validator.User;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,11 +26,27 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+#region Fluent Validation implementation
 builder.Services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute()))
     .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CategoryDtoValidator>())
     .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CategoryCreateDtoValidator>())
-    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CategoryUpdateDtoValidator>());
-
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CategoryUpdateDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CityDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CityCreateDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CityUpdateDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<EventDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<EventCreateDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<EventUpdateDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RoleDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RoleCreateDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RoleUpdateDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<TicketDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<TicketCreateDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<TicketUpdateDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<UserDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<UserCreateDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<UserUpdateDtoValidator>());
+#endregion
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
