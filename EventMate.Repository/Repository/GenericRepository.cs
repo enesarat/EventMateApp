@@ -1,4 +1,5 @@
-﻿using EventMate.Core.Repository;
+﻿using EventMate.Core.Model.Abstract;
+using EventMate.Core.Repository;
 using EventMate.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EventMate.Repository.Repository
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseModel
     {
         protected readonly ApplicationDbContext _context;
         private readonly DbSet<T> _entities;
@@ -51,6 +52,11 @@ namespace EventMate.Repository.Repository
         public async Task<T> GetByIdAsync(int id)
         {
             return await _entities.FindAsync(id);
+        }
+
+        public async Task<T> GetByIdAsNoTrackingAsync(int id)
+        {
+            return await _entities.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public void Update(T entity)

@@ -37,14 +37,16 @@ namespace EventMate.Service.Service
 
         public async Task<CustomResponse<NoContentResponse>> UpdateAsync(CategoryUpdateDto categoryUpdateDto)
         {
-            var entity = _mapper.Map<Category>(categoryUpdateDto);
-            if (await _categoryRepository.AnyAsync(x => x.Id == entity.Id && x.IsActive == true))
+            if (await _categoryRepository.AnyAsync(x => x.Id == categoryUpdateDto.Id && x.IsActive == true))
             {
+                var entity = _mapper.Map<Category>(categoryUpdateDto);
+
+                entity.UpdatedDate = DateTime.Now;
                 _categoryRepository.Update(entity);
                 await _unitOfWork.CommitAsync();
                 return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
             }
-            return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status404NotFound, $" {typeof(Category).Name} ({entity.Id}) not found. Updete operation is not successfull. ");
+            return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status404NotFound, $" {typeof(Category).Name} ({categoryUpdateDto.Id}) not found. Updete operation is not successfull. ");
         }
     }
 }

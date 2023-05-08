@@ -9,5 +9,7 @@ namespace EventMate.Core.Repository
 {
     public interface IEventRepository : IGenericRepository<Event>
     {
+        Task<IEnumerable<Event>> GetEventsWithRole();
+        Task<Event> GetEventWithRole(int id);
     }
 }

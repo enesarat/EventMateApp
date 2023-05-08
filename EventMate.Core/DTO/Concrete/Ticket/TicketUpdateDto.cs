@@ -12,5 +12,7 @@ namespace EventMate.Core.DTO.Concrete.Ticket
         public string IdentifiedTicketNumber { get; set; }
         public int UserId { get; set; }
         public int EventId { get; set; }
+        public DateTime CreatedDate { get; set; }
+
     }
 }

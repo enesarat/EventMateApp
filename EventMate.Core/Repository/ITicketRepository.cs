@@ -9,5 +9,7 @@ namespace EventMate.Core.Repository
 {
     public interface ITicketRepository : IGenericRepository<Ticket>
     {
+        Task<IEnumerable<Ticket>> GetTicketsWithDetails();
+        Task<Ticket> GetTicketWithDetails(int id);
     }
 }

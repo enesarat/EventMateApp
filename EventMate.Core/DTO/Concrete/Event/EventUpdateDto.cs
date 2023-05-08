@@ -19,5 +19,7 @@ namespace EventMate.Core.DTO.Concrete.Event
         public int CategoryId { get; set; }
         public int Quota { get; set; }
         public bool IsApproved { get; set; } = false;
+        public DateTime CreatedDate { get; set; }
+
     }
 }

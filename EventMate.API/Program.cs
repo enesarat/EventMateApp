@@ -1,8 +1,16 @@
 using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using EventMate.API.Filters;
 using EventMate.API.Middlewares;
 using EventMate.API.Modules;
+using EventMate.Core.DTO.Concrete.Category;
+using EventMate.Core.DTO.Concrete.City;
+using EventMate.Core.DTO.Concrete.Event;
+using EventMate.Core.DTO.Concrete.Role;
+using EventMate.Core.DTO.Concrete.Ticket;
+using EventMate.Core.DTO.Concrete.User;
+using EventMate.Core.Model.Concrete;
 using EventMate.Core.Repository;
 using EventMate.Core.Service;
 using EventMate.Core.UnitOfWork;
@@ -56,6 +64,15 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+#region CreateDate Filter Definitions
+builder.Services.AddScoped<CreateDateSafetyFilter<Category, CategoryUpdateDto>>();
+builder.Services.AddScoped<CreateDateSafetyFilter<City, CityUpdateDto>>();
+builder.Services.AddScoped<CreateDateSafetyFilter<Role, RoleUpdateDto>>();
+builder.Services.AddScoped<CreateDateSafetyFilter<User, UserUpdateDto>>();
+builder.Services.AddScoped<CreateDateSafetyFilter<Event, EventUpdateDto>>();
+builder.Services.AddScoped<CreateDateSafetyFilter<Ticket, TicketUpdateDto>>();
+#endregion
 
 #region Autofac Definition Sources
 //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

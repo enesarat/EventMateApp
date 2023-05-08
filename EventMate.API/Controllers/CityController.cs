@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using EventMate.API.Filters;
+﻿using EventMate.API.Filters;
 using EventMate.Core.DTO.Concrete.Category;
-using EventMate.Core.DTO.Concrete.Response;
+using EventMate.Core.DTO.Concrete.City;
 using EventMate.Core.Model.Concrete;
 using EventMate.Core.Service;
 using Microsoft.AspNetCore.Http;
@@ -9,10 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EventMate.API.Controllers
 {
-    public class CategoryController : CustomBaseController
+
+    public class CityController : CustomBaseController
     {
-        private readonly ICategoryService _service;
-        public CategoryController(ICategoryService service)
+        private readonly ICityService _service;
+        public CityController(ICityService service)
         {
             _service = service;
         }
@@ -30,16 +30,16 @@ namespace EventMate.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CategoryCreateDto categoryDto)
+        public async Task<IActionResult> Create(CityCreateDto cityCreateDto)
         {
-            return CustomActionResult(await _service.AddAsync(categoryDto));
+            return CustomActionResult(await _service.AddAsync(cityCreateDto));
         }
 
         [HttpPut]
-        [ServiceFilter(typeof(CreateDateSafetyFilter<Category,CategoryUpdateDto>))]
-        public async Task<IActionResult> Update([FromBody] CategoryUpdateDto categoryDto)
+        [ServiceFilter(typeof(CreateDateSafetyFilter<City, CityUpdateDto>))]
+        public async Task<IActionResult> Update([FromBody] CityUpdateDto cityUpdateDto)
         {
-            return CustomActionResult(await _service.UpdateAsync(categoryDto));
+            return CustomActionResult(await _service.UpdateAsync(cityUpdateDto));
         }
 
         [HttpDelete("{id}")]

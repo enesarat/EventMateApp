@@ -38,7 +38,9 @@ namespace EventMate.Service.Mapper
             CreateMap<RoleCreateDto, Role>();
             CreateMap<RoleUpdateDto, Role>();
 
-            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<User, UserDto>()
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.Name))
+                .ReverseMap();
             CreateMap<UserCreateDto, User>();
             CreateMap<UserUpdateDto, User>();
 

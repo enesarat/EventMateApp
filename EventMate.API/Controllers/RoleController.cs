@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using EventMate.API.Filters;
-using EventMate.Core.DTO.Concrete.Category;
-using EventMate.Core.DTO.Concrete.Response;
+﻿using EventMate.API.Filters;
+using EventMate.Core.DTO.Concrete.City;
+using EventMate.Core.DTO.Concrete.Role;
 using EventMate.Core.Model.Concrete;
 using EventMate.Core.Service;
 using Microsoft.AspNetCore.Http;
@@ -9,10 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EventMate.API.Controllers
 {
-    public class CategoryController : CustomBaseController
+
+    public class RoleController : CustomBaseController
     {
-        private readonly ICategoryService _service;
-        public CategoryController(ICategoryService service)
+        private readonly IRoleService _service;
+
+        public RoleController(IRoleService service)
         {
             _service = service;
         }
@@ -30,16 +31,16 @@ namespace EventMate.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CategoryCreateDto categoryDto)
+        public async Task<IActionResult> Create(RoleCreateDto roleCreateDto)
         {
-            return CustomActionResult(await _service.AddAsync(categoryDto));
+            return CustomActionResult(await _service.AddAsync(roleCreateDto));
         }
 
         [HttpPut]
-        [ServiceFilter(typeof(CreateDateSafetyFilter<Category,CategoryUpdateDto>))]
-        public async Task<IActionResult> Update([FromBody] CategoryUpdateDto categoryDto)
+        [ServiceFilter(typeof(CreateDateSafetyFilter<Role, RoleUpdateDto>))]
+        public async Task<IActionResult> Update([FromBody] RoleUpdateDto roleUpdateDto)
         {
-            return CustomActionResult(await _service.UpdateAsync(categoryDto));
+            return CustomActionResult(await _service.UpdateAsync(roleUpdateDto));
         }
 
         [HttpDelete("{id}")]

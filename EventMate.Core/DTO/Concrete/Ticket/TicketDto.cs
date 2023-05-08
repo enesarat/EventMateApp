@@ -1,4 +1,6 @@
 ﻿using EventMate.Core.DTO.Abstract;
+using EventMate.Core.DTO.Concrete.Event;
+using EventMate.Core.DTO.Concrete.User;
 using EventMate.Core.Model.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,8 @@ namespace EventMate.Core.DTO.Concrete.Ticket
     {
         public string IdentifiedTicketNumber { get; set; }
         public string User { get; set; }
+        public UserDto UserProp { get; set; }
         public string Event { get; set; }
+        public EventDto MyProperty { get; set; }
     }
 }
