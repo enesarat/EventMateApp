@@ -87,3 +87,4 @@ C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\FluentVal
 C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\Autofac.dll
 C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\Autofac.Extensions.DependencyInjection.dll
+C:\Users\Enes\source\repos\EventMateApp\EventMate.API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
