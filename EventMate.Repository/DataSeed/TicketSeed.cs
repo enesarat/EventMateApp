@@ -14,10 +14,10 @@ namespace EventMate.Repository.DataSeed
         public void Configure(EntityTypeBuilder<Ticket> builder)
         {
             builder.HasData(
-                new Ticket { Id = 1, CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true, EventId = 1, IdentifiedTicketNumber = $"EA_060522_01_{Guid.NewGuid().ToString()}", UserId = 2 },
-                new Ticket { Id = 2, CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true, EventId = 3, IdentifiedTicketNumber = $"EA_060522_01_{Guid.NewGuid().ToString()}", UserId = 2 },
-                new Ticket { Id = 3, CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true, EventId = 6, IdentifiedTicketNumber = $"EA_060522_01_{Guid.NewGuid().ToString()}", UserId = 2 },
-                new Ticket { Id = 4, CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true, EventId = 6, IdentifiedTicketNumber = $"EA_060522_01_{Guid.NewGuid().ToString()}", UserId = 3 }
+                new Ticket { Id = 1, CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true, EventId = 1, IdentifiedTicketNumber = $"TESSTR-ROCK'8927E-13B0C", UserId = 2 },
+                new Ticket { Id = 2, CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true, EventId = 3, IdentifiedTicketNumber = $"TESSTR-STANLFB1CF-BDE30", UserId = 2 },
+                new Ticket { Id = 3, CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true, EventId = 6, IdentifiedTicketNumber = $"TESSTR-CHANP25173-BAE4F", UserId = 2 },
+                new Ticket { Id = 4, CreatedDate = DateTime.Now, CreatedBy = "SYSTEM", IsActive = true, EventId = 6, IdentifiedTicketNumber = $"TESSTR-CHANPBB1B8-7A99E", UserId = 3 }
               );
         }
     }

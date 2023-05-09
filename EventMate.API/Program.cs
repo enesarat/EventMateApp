@@ -154,8 +154,6 @@ builder.Services.AddScoped<UpdateIsApprSafetyFiltercs<Event, EventUpdateDto>>();
 builder.Services.AddScoped<EventStartDateFilter>();
 #endregion
 
-
-
 #region CreatedBy Filter Definitions
 builder.Services.AddScoped<CreatedBySafetyFilter<Category, CategoryUpdateDto>>();
 builder.Services.AddScoped<CreatedBySafetyFilter<City, CityUpdateDto>>();

@@ -9,7 +9,8 @@ namespace EventMate.Core.Repository
 {
     public interface IEventRepository : IGenericRepository<Event>
     {
-        Task<IEnumerable<Event>> GetEventsWithRole();
-        Task<Event> GetEventWithRole(int id);
+        Task<IEnumerable<Event>> GetEventsWithDetails();
+        Task<Event> GetEventWithDetails(int id);
+        Task UpdateQuotaAfterSale(int id);
     }
 }

@@ -16,16 +16,23 @@ namespace EventMate.Repository.Repository
         {
         }
 
-        public async Task<IEnumerable<Event>> GetEventsWithRole()
+        public async Task<IEnumerable<Event>> GetEventsWithDetails()
         {
             //Eager Loading
             return _context.Events.AsNoTracking().Include(x => x.Category).Include(x => x.City).AsEnumerable();
         }
 
-        public Task<Event> GetEventWithRole(int id)
+        public Task<Event> GetEventWithDetails(int id)
         {
             //Eager Loading
             return _context.Events.Include(x => x.Category).Include(x => x.City).FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task UpdateQuotaAfterSale(int id)
+        {
+            var _event =await  _context.Events.FindAsync(id);
+            _event.Quota = -1;
+            _context.Events.Update(_event);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace EventMate.Core.Service
         public Task<CustomResponse<IEnumerable<EventDto>>> GetEventsWithDetailsAsync();
         public Task<CustomResponse<EventDto>> GetEventWithDetailsAsync(int id);
         Task<ActiveAccountDto> GetCurrentAccount(HttpContext _context);
+        Task<CustomResponse<List<EventDto>>> GetFilteredEventsAsync(EventFilter filter);
 
     }
 }

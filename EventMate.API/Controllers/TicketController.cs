@@ -12,10 +12,12 @@ namespace EventMate.API.Controllers
     public class TicketController : CustomBaseController
     {
         private readonly ITicketService _service;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public TicketController(ITicketService service)
+        public TicketController(ITicketService service, IHttpContextAccessor contextAccessor)
         {
             _service = service;
+            _contextAccessor = contextAccessor;
         }
 
         [HttpGet("{id}")]
@@ -33,7 +35,7 @@ namespace EventMate.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(TicketCreateDto ticketCreateDto)
         {
-            return CustomActionResult(await _service.AddAsync(ticketCreateDto));
+            return CustomActionResult(await _service.AddAsync(ticketCreateDto, _contextAccessor.HttpContext));
         }
 
         [HttpPut]

@@ -32,6 +32,12 @@ namespace EventMate.API.Controllers
             return CustomActionResult(await _service.GetEventsWithDetailsAsync());
         }
 
+        [HttpPost("EventFilter")]
+        public async Task<IActionResult> GetFilteredEvents([FromBody] EventFilter filter)
+        {
+            return CustomActionResult(await _service.GetFilteredEventsAsync(filter));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(EventCreateDto eventCreateDto)
         {
