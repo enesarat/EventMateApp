@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EventMate.Core.DTO.Concrete.Event
 {
-    public class EventDto : BaseDto
+    public class EventDto : BaseDto,IEvent
     {
         public string Name { get; set; }
         public DateTime StartDate { get; set; }

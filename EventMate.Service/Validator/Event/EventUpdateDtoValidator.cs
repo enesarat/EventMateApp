@@ -14,7 +14,7 @@ namespace EventMate.Service.Validator.Event
         {
             RuleFor(x => x.Id).InclusiveBetween(1, int.MaxValue).WithMessage(" {PropertyName} must be greater than 0 ");
             RuleFor(x => x.Name).NotNull().WithMessage(" {PropertyName} must have any value ").NotEmpty().WithMessage(" {PropertyName} is required ");
-            RuleFor(x => x.StartDate)
+            /*RuleFor(x => x.StartDate)
             .Must(date => date != default(DateTime))
             .WithMessage(" Please enter a valid date! ")
             .GreaterThan(DateTime.Today)
@@ -23,7 +23,7 @@ namespace EventMate.Service.Validator.Event
             .Must(date => date != default(DateTime))
             .WithMessage(" Please enter a valid date! ")
             .GreaterThan(DateTime.Today)
-            .WithMessage(" The start date cannot be earlier than today. ");
+            .WithMessage(" The start date cannot be earlier than today. ");*/
             RuleFor(x => x.Description).NotNull().WithMessage(" {PropertyName} must have any value ").NotEmpty().WithMessage(" {PropertyName} is required ");
             RuleFor(x => x.CityId).InclusiveBetween(1, int.MaxValue).WithMessage(" {PropertyName} must be greater than 0 ");
             RuleFor(x => x.Address).NotNull().WithMessage(" {PropertyName} must have any value ").NotEmpty().WithMessage(" {PropertyName} is required ");

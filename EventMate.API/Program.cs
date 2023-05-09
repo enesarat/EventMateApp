@@ -112,7 +112,7 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
-#region CreateDate Filter Definitions
+#region CreatedDate Filter Definitions
 builder.Services.AddScoped<CreateDateSafetyFilter<Category, CategoryUpdateDto>>();
 builder.Services.AddScoped<CreateDateSafetyFilter<City, CityUpdateDto>>();
 builder.Services.AddScoped<CreateDateSafetyFilter<Role, RoleUpdateDto>>();
@@ -120,7 +120,50 @@ builder.Services.AddScoped<CreateDateSafetyFilter<User, UserUpdateDto>>();
 builder.Services.AddScoped<CreateDateSafetyFilter<User, UserUpdateAsAdminDto>>();
 builder.Services.AddScoped<CreateDateSafetyFilter<Event, EventUpdateDto>>();
 builder.Services.AddScoped<CreateDateSafetyFilter<Ticket, TicketUpdateDto>>();
+#endregion
 
+#region StartDate Filter Definitions
+builder.Services.AddScoped<StartDateSafetyFilter<Event, EventUpdateDto>>();
+#endregion
+
+#region EndDate Filter Definitions
+builder.Services.AddScoped<EndDateSafetyFilter<Event, EventUpdateDto>>();
+#endregion
+
+#region Update Name Safety Filter Definitions
+builder.Services.AddScoped<UpdateEventNameSafetyFilter<Event, EventUpdateDto>>();
+#endregion
+
+#region Update Desc Safety Filter Definitions
+builder.Services.AddScoped<UpdateEventDescSafetyFilter<Event, EventUpdateDto>>();
+#endregion
+
+#region Update Desc Safety Filter Definitions
+builder.Services.AddScoped<UpdateCityIdSafetyFilter<Event, EventUpdateDto>>();
+#endregion
+
+#region Update Desc Safety Filter Definitions
+builder.Services.AddScoped<UpdateCategoryIdSafetyFilter<Event, EventUpdateDto>>();
+#endregion
+
+#region Update Approved Safety Filter Definitions
+builder.Services.AddScoped<UpdateIsApprSafetyFiltercs<Event, EventUpdateDto>>();
+#endregion
+
+#region Event Start Date (before delete) Safety Filter Definitions
+builder.Services.AddScoped<EventStartDateFilter>();
+#endregion
+
+
+
+#region CreatedBy Filter Definitions
+builder.Services.AddScoped<CreatedBySafetyFilter<Category, CategoryUpdateDto>>();
+builder.Services.AddScoped<CreatedBySafetyFilter<City, CityUpdateDto>>();
+builder.Services.AddScoped<CreatedBySafetyFilter<Role, RoleUpdateDto>>();
+builder.Services.AddScoped<CreatedBySafetyFilter<User, UserUpdateDto>>();
+builder.Services.AddScoped<CreatedBySafetyFilter<User, UserUpdateAsAdminDto>>();
+builder.Services.AddScoped<CreatedBySafetyFilter<Event, EventUpdateDto>>();
+builder.Services.AddScoped<CreatedBySafetyFilter<Ticket, TicketUpdateDto>>();
 #endregion
 
 #region Autofac Definition Sources

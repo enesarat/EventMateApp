@@ -1,4 +1,5 @@
-﻿using EventMate.Core.Model.Concrete;
+﻿using EventMate.Core.DTO.Abstract;
+using EventMate.Core.Model.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EventMate.Core.DTO.Concrete.Event
 {
-    public class EventCreateDto
+    public class EventCreateDto : IEvent
     {
         public string Name { get; set; }
         public DateTime StartDate { get; set; }

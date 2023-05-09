@@ -89,6 +89,7 @@ namespace EventMate.API.Controllers
 
         [HttpPut]
         [ServiceFilter(typeof(CreateDateSafetyFilter<User, UserUpdateAsAdminDto>))]
+        [ServiceFilter(typeof(CreatedBySafetyFilter<Event, EventUpdateDto>))]
         public async Task<IActionResult> UpdateAsAdmin([FromBody] UserUpdateAsAdminDto userUpdateDto)
         {
             return CustomActionResult(await _service.UpdateAsAdminAsync(userUpdateDto));

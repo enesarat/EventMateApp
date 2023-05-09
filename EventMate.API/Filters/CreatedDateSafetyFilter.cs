@@ -35,10 +35,9 @@ namespace EventMate.API.Filters
             {
                 dto.GetType().GetProperty("CreatedDate")?.SetValue(dto, model.CreatedDate);
                 
-                await next();
             }
-            
-            
+            await next();
+
         }
 
         private DateTime GetCreatedDate(Dto dto)

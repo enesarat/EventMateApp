@@ -1,4 +1,5 @@
-﻿using EventMate.Core.Model.Concrete;
+﻿using EventMate.Core.DTO.Abstract;
+using EventMate.Core.Model.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EventMate.Core.DTO.Concrete.Event
 {
-    public class EventUpdateDto
+    public class EventUpdateDto : IEvent
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -20,6 +21,8 @@ namespace EventMate.Core.DTO.Concrete.Event
         public int Quota { get; set; }
         public bool IsApproved { get; set; } = false;
         public DateTime CreatedDate { get; set; }
+        public string? CreatedBy { get; set; }
+
 
     }
 }

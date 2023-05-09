@@ -196,10 +196,8 @@ namespace EventMate.Service.Service
             var accountEmail = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email)?.Value;
             var user = _userRepository.Where(x => x.Email == accountEmail).FirstOrDefault();
 
-            //var user = _userRepository.Where(x => x.RefreshToken == refreshToken).FirstOrDefault();
             if (user != null && user.RefreshToken != null)
             {
-                //var userClaims = identity.Claims;
                 ActiveAccountDto currentaccount = new ActiveAccountDto
                 {
                     Email = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email)?.Value,
@@ -279,7 +277,6 @@ namespace EventMate.Service.Service
             var accountEmail = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email)?.Value;
             var user =_userRepository.Where(x=>x.Email==accountEmail).FirstOrDefault();
 
-            //var user = _userRepository.Where(x => x.RefreshToken == refreshToken).FirstOrDefault();
             if (user != null && user.RefreshToken!=null)
             {
                 user.RefreshToken = null;
@@ -302,7 +299,6 @@ namespace EventMate.Service.Service
                 {
                     identity.RemoveClaim(claim);
                 }
-                //await _contextAccessor.SignOutAsync();
                 
                 return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
             }
