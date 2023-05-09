@@ -192,10 +192,14 @@ namespace EventMate.Service.Service
         public async Task<ActiveAccountDto> GetCurrentAccount()
         {
             var identity = _contextAccessor.HttpContext.User.Identity as ClaimsIdentity;
+            var userClaims = identity.Claims;
+            var accountEmail = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email)?.Value;
+            var user = _userRepository.Where(x => x.Email == accountEmail).FirstOrDefault();
 
-            if (identity != null)
+            //var user = _userRepository.Where(x => x.RefreshToken == refreshToken).FirstOrDefault();
+            if (user != null && user.RefreshToken != null)
             {
-                var userClaims = identity.Claims;
+                //var userClaims = identity.Claims;
                 ActiveAccountDto currentaccount = new ActiveAccountDto
                 {
                     Email = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email)?.Value,
@@ -268,26 +272,23 @@ namespace EventMate.Service.Service
             return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status404NotFound, $" {typeof(User).Name} ({userUpdateDto.Id}) not found. Updete operation is not successfull. ");
         }
 
-        public async Task<CustomResponse<NoContentResponse>> Logout()
+        public async Task<CustomResponse<NoContentResponse>> Logout(HttpContext _contextAccessor)
         {
-            var identity = _contextAccessor.HttpContext.User.Identity as ClaimsIdentity;
+            var identity = _contextAccessor.User.Identity as ClaimsIdentity;
+            var userClaims = identity.Claims;
+            var accountEmail = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email)?.Value;
+            var user =_userRepository.Where(x=>x.Email==accountEmail).FirstOrDefault();
 
-            if (identity != null)
+            //var user = _userRepository.Where(x => x.RefreshToken == refreshToken).FirstOrDefault();
+            if (user != null && user.RefreshToken!=null)
             {
-                var userClaims = identity.Claims;
-                string accountEmail = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email)?.Value;
-                var user = _userRepository.Where(x => x.Email == accountEmail).FirstOrDefault();
+                user.RefreshToken = null;
+                user.RefreshTokenExpireDate = null;
+                user.LastActivity= DateTime.Now;
+                _userRepository.Update(user);
+                await _unitOfWork.CommitAsync();
 
-                //var user = _userRepository.Where(x => x.RefreshToken == refreshToken).FirstOrDefault();
-                if (user != null && user.RefreshToken != null)
-                {
-                    user.RefreshToken = null;
-                    user.RefreshTokenExpireDate = null;
-                    user.LastActivity = DateTime.Now;
-                    _userRepository.Update(user);
-                    await _unitOfWork.CommitAsync();
-
-                    var claimTypesToDelete = new List<string>
+                var claimTypesToDelete = new List<string>
                 {
                     ClaimTypes.Email,
                     ClaimTypes.Name,
@@ -296,15 +297,14 @@ namespace EventMate.Service.Service
                 };
 
 
-
-                    foreach (var claim in identity.Claims.ToList())
-                    {
-                        identity.RemoveClaim(claim);
-                    }
-                    await _contextAccessor.HttpContext.SignOutAsync();
-
-                    return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
+                
+                foreach (var claim in identity.Claims.ToList())
+                {
+                    identity.RemoveClaim(claim);
                 }
+                //await _contextAccessor.SignOutAsync();
+                
+                return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
             }
             return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status404NotFound, "  No active session found. ");
 

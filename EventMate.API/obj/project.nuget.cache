@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vChj6j3IFXKBfrU8B/erBWtG/1BG1TL6tkTi4G0tYlpQwAG/tmkVAd5nlBXDm6YEzyUU6ooVvvj+PnlXCj7NOA==",
+  "dgSpecHash": "ArqgbLofyycq8bOa8Z1F03OmdoZzB0n3l5t7FJ5xdgxFaGwjKp038HiSebhc9FEteZdsU7BAU/EATdafsBSOkg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Enes\\source\\repos\\EventMateApp\\EventMate.API\\EventMate.API.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,8 @@
     "C:\\Users\\Enes\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.5\\microsoft.aspnetcore.authentication.jwtbearer.7.0.5.nupkg.sha512",
+    "C:\\Users\\Enes\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\Enes\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.2\\microsoft.aspnetcore.openapi.7.0.2.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

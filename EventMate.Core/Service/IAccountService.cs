@@ -4,6 +4,7 @@ using EventMate.Core.DTO.Concrete.Token;
 using EventMate.Core.DTO.Concrete.User;
 using EventMate.Core.Model.Concrete;
 using EventMate.Core.Model.Token;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace EventMate.Core.Service
         UserDto Authenticate(TokenRequest userLogin);
         TokenDto GenerateToken(UserDto user);
         Task<TokenDto> Login(TokenRequest userLogin);
-        Task<CustomResponse<NoContentResponse>> Logout();
+        Task<CustomResponse<NoContentResponse>> Logout(HttpContext context);
 
         Task<TokenDto> RefreshToken(string tokenStr);
         Task<ActiveAccountDto> GetCurrentAccount();

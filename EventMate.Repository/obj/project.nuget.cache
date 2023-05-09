@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "fJStqT+ZkcDpcQV8jjhkWYaHXS5w1XaZ6gDWp1dwYiK14BL6e4S3LIiHIAj1dn1enuqLqy5z14cRYLQmLEEBkg==",
+  "dgSpecHash": "mAqdr+O9FQTqyR4eU3XEOKGSlO0Po1j6B/g/7mTnVTEkPSn4C/ppHJZT4JoyhMYMEKrz7Rnunb5yH5xaVjOozQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Enes\\source\\repos\\EventMateApp\\EventMate.Repository\\EventMate.Repository.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Enes\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Enes\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\Enes\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",

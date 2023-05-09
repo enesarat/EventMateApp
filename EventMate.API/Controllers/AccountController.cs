@@ -19,11 +19,13 @@ namespace EventMate.API.Controllers
     {
         private readonly IAccountService _service;
         private readonly IUserService _userService;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public AccountController(IAccountService service, IUserService userService)
+        public AccountController(IAccountService service, IUserService userService, IHttpContextAccessor contextAccessor)
         {
             _service = service;
             _userService = userService;
+            _contextAccessor = contextAccessor;
         }
         [AllowAnonymous]
         [HttpPost("connect/token")]
@@ -36,7 +38,7 @@ namespace EventMate.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            return CustomActionResult(await _service.Logout());
+            return CustomActionResult(await _service.Logout(_contextAccessor.HttpContext));
         }
 
         [HttpGet("refreshToken")]

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5tQ4EEV8yvUL37cjTfxZT/MlmB9N9Dm58CCT13OFtqGIW++pEIA1KXOcD6ykYttccKfBcR7NLMYNn8wykMWVSg==",
+  "dgSpecHash": "UKMGuXpO3ThEacOyorH1mrRLBYuOkj+7ainO8rITMnU04BGLbK8846Rm5OCBQ32zkVVjoSffNACXTrjx2DjXYA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Enes\\source\\repos\\EventMateApp\\EventMate.Service\\EventMate.Service.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,8 @@
     "C:\\Users\\Enes\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.5\\microsoft.aspnetcore.authentication.jwtbearer.7.0.5.nupkg.sha512",
+    "C:\\Users\\Enes\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\Enes\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",
