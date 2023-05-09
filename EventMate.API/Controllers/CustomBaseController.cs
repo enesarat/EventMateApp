@@ -1,4 +1,5 @@
-﻿using EventMate.Core.DTO.Concrete.Response;
+﻿using EventMate.API.Filters;
+using EventMate.Core.DTO.Concrete.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,7 @@ namespace EventMate.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ValidateFilterAttribute]
     public class CustomBaseController : ControllerBase
     {
         [NonAction]

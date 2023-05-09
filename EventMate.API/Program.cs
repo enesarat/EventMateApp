@@ -56,13 +56,18 @@ builder.Services.AddControllers(options => options.Filters.Add(new ValidateFilte
     .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<TicketUpdateDtoValidator>())
     .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<UserDtoValidator>())
     .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<UserCreateDtoValidator>())
-    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<UserUpdateDtoValidator>());
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<UserUpdateDtoValidator>())
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<UserUpdateAsAdminDtoValidator>());
 #endregion
+
+builder.Services.AddHttpContextAccessor();
+
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -73,8 +78,10 @@ builder.Services.AddScoped<CreateDateSafetyFilter<Category, CategoryUpdateDto>>(
 builder.Services.AddScoped<CreateDateSafetyFilter<City, CityUpdateDto>>();
 builder.Services.AddScoped<CreateDateSafetyFilter<Role, RoleUpdateDto>>();
 builder.Services.AddScoped<CreateDateSafetyFilter<User, UserUpdateDto>>();
+builder.Services.AddScoped<CreateDateSafetyFilter<User, UserUpdateAsAdminDto>>();
 builder.Services.AddScoped<CreateDateSafetyFilter<Event, EventUpdateDto>>();
 builder.Services.AddScoped<CreateDateSafetyFilter<Ticket, TicketUpdateDto>>();
+
 #endregion
 
 #region Autofac Definition Sources

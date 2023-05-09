@@ -43,6 +43,7 @@ namespace EventMate.Service.Mapper
                 .ReverseMap();
             CreateMap<UserCreateDto, User>();
             CreateMap<UserUpdateDto, User>();
+            CreateMap<UserUpdateAsAdminDto, User>();
 
             CreateMap<TicketCreateDto, Ticket>();
             CreateMap<TicketUpdateDto, Ticket>();

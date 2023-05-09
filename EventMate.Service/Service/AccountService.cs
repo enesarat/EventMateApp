@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EventMate.Core.DTO.Concrete.Account;
 using EventMate.Core.DTO.Concrete.Response;
 using EventMate.Core.DTO.Concrete.Role;
 using EventMate.Core.DTO.Concrete.Token;
@@ -34,11 +35,27 @@ namespace EventMate.Service.Service
             _contextAccessor = contextAccessor;
         }
 
-        public async Task<CustomResponse<UserDto>> AddAdminAsync(UserCreateDto dto)
+        public async Task<CustomResponse<NoContentResponse>> UpdateAsAdminAsync(UserUpdateAsAdminDto userUpdateDto)
+        {
+            if (await _userRepository.AnyAsync(x => x.Id == userUpdateDto.Id && x.IsActive == true))
+            {
+                var entity = _mapper.Map<User>(userUpdateDto);
+
+                entity.UpdatedDate = DateTime.Now;
+                _userRepository.Update(entity);
+                await _unitOfWork.CommitAsync();
+                return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
+            }
+            return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status404NotFound, $" {typeof(User).Name} ({userUpdateDto.Id}) not found. Updete operation is not successfull. ");
+
+        }
+
+        public async Task<CustomResponse<NoContentResponse>> AddAdminAsync(UserCreateDto dto)
         {
             var newEntity = _mapper.Map<User>(dto);
             var currentAccount = GetCurrentAccount();
             newEntity.CreatedBy = currentAccount.Result.Email;
+            newEntity.CreatedDate = DateTime.Now;
             newEntity.RoleId = 1;
             await _userRepository.AddAsync(newEntity);
             await _unitOfWork.CommitAsync();
@@ -46,14 +63,15 @@ namespace EventMate.Service.Service
             var refObj = _unitOfWork.RoleRepository.Where(x => x.Id == newEntity.RoleId).FirstOrDefault();
             var newDto = _mapper.Map<UserDto>(newEntity);
             newDto.Role = refObj.Name;
-            return CustomResponse<UserDto>.Success(StatusCodes.Status200OK, newDto);
+            return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
         }
 
-        public async Task<CustomResponse<UserDto>> AddParticipantAsync(UserCreateDto dto)
+        public async Task<CustomResponse<NoContentResponse>> AddParticipantAsync(UserCreateDto dto)
         {
             var newEntity = _mapper.Map<User>(dto);
             var currentAccount = GetCurrentAccount();
             newEntity.CreatedBy = currentAccount.Result.Email;
+            newEntity.CreatedDate = DateTime.Now;
             newEntity.RoleId = 3;
             await _userRepository.AddAsync(newEntity);
             await _unitOfWork.CommitAsync();
@@ -61,13 +79,14 @@ namespace EventMate.Service.Service
             var refObj = _unitOfWork.RoleRepository.Where(x => x.Id == newEntity.RoleId).FirstOrDefault();
             var newDto = _mapper.Map<UserDto>(newEntity);
             newDto.Role = refObj.Name;
-            return CustomResponse<UserDto>.Success(StatusCodes.Status200OK, newDto);
+            return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
         }
-        public async Task<CustomResponse<UserDto>> AddPersonnelAsync(UserCreateDto dto)
+        public async Task<CustomResponse<NoContentResponse>> AddPersonnelAsync(UserCreateDto dto)
         {
             var newEntity = _mapper.Map<User>(dto);
             var currentAccount = GetCurrentAccount();
             newEntity.CreatedBy = currentAccount.Result.Email;
+            newEntity.CreatedDate= DateTime.Now;
             newEntity.RoleId = 2;
             await _userRepository.AddAsync(newEntity);
             await _unitOfWork.CommitAsync();
@@ -75,7 +94,7 @@ namespace EventMate.Service.Service
             var refObj = _unitOfWork.RoleRepository.Where(x => x.Id == newEntity.RoleId).FirstOrDefault();
             var newDto = _mapper.Map<UserDto>(newEntity);
             newDto.Role = refObj.Name;
-            return CustomResponse<UserDto>.Success(StatusCodes.Status200OK, newDto);
+            return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
         }
         public UserDto Authenticate(TokenRequest userLogin)
         {
@@ -105,6 +124,7 @@ namespace EventMate.Service.Service
             {
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Surname, user.Surname),
                 new Claim(ClaimTypes.Role, user.Role),
             };
 
@@ -124,17 +144,18 @@ namespace EventMate.Service.Service
         {
             return Guid.NewGuid().ToString();
         }
-        public async Task<UserDto> GetCurrentAccount()
+        public async Task<ActiveAccountDto> GetCurrentAccount()
         {
             var identity = _contextAccessor.HttpContext.User.Identity as ClaimsIdentity;
 
             if (identity != null)
             {
                 var userClaims = identity.Claims;
-                UserDto currentaccount = new UserDto
+                ActiveAccountDto currentaccount = new ActiveAccountDto
                 {
                     Email = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email)?.Value,
                     Name = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Name)?.Value,
+                    Surname = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Surname)?.Value,
                     Role = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Role)?.Value
 
                 };
