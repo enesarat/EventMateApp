@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pC5vVAy5V9686N52VIvpLRA2X1CHv/AxViT9mUiAC+elBH73j7xPXWmmapXrKbxW7bYBSs+Ltlq4lRO6PXlCiA==",
+  "dgSpecHash": "vChj6j3IFXKBfrU8B/erBWtG/1BG1TL6tkTi4G0tYlpQwAG/tmkVAd5nlBXDm6YEzyUU6ooVvvj+PnlXCj7NOA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Enes\\source\\repos\\EventMateApp\\EventMate.API\\EventMate.API.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\Enes\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\Enes\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
     "C:\\Users\\Enes\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",

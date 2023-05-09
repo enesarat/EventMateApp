@@ -32,6 +32,13 @@ namespace EventMate.API.Controllers
             return Ok(await _service.Login(userLogin));
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            return CustomActionResult(await _service.Logout());
+        }
+
         [HttpGet("refreshToken")]
         public async Task<IActionResult> RefreshToken([FromQuery] string token)
         {
@@ -69,9 +76,10 @@ namespace EventMate.API.Controllers
         {
             return CustomActionResult(await _service.AddPersonnelAsync(personnelRoleDto));
         }
+        [AllowAnonymous]
         [HttpPost]
         [Route("[action]")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateAdmin(UserCreateDto adminRoleDto)
         {
             return CustomActionResult(await _service.AddAdminAsync(adminRoleDto));

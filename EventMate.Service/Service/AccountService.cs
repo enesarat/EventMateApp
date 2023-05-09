@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BCrypt.Net;
 using EventMate.Core.DTO.Concrete.Account;
 using EventMate.Core.DTO.Concrete.Response;
 using EventMate.Core.DTO.Concrete.Role;
@@ -10,6 +11,7 @@ using EventMate.Core.Repository;
 using EventMate.Core.Service;
 using EventMate.Core.UnitOfWork;
 using EventMate.Repository.Repository;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -39,6 +41,10 @@ namespace EventMate.Service.Service
         {
             if (await _userRepository.AnyAsync(x => x.Id == userUpdateDto.Id && x.IsActive == true))
             {
+                if (await EmailVerifierAsync(userUpdateDto.Email))
+                {
+                    return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status400BadRequest, "The e-mail address is registered in the system. Please try another e-mail address.");
+                }
                 var entity = _mapper.Map<User>(userUpdateDto);
 
                 entity.UpdatedDate = DateTime.Now;
@@ -49,12 +55,37 @@ namespace EventMate.Service.Service
             return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status404NotFound, $" {typeof(User).Name} ({userUpdateDto.Id}) not found. Updete operation is not successfull. ");
 
         }
-
+        private string PasswordHasher(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password);
+        }
+        private bool PasswordVerifier(string inputPassword, string currentPassword)
+        {
+            if(BCrypt.Net.BCrypt.Verify(inputPassword, currentPassword))
+            {
+                return true;
+            }
+            return false;
+        }
+        private async Task<bool> EmailVerifierAsync(string email)
+        {
+            if(await _userRepository.AnyAsync(x => x.Email == email))
+            {
+                return true;
+            }
+            return false;
+        }
         public async Task<CustomResponse<NoContentResponse>> AddAdminAsync(UserCreateDto dto)
         {
+            if (await EmailVerifierAsync(dto.Email))
+            {
+                return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status400BadRequest, "The e-mail address is registered in the system. Please try another e-mail address.");
+            }
+            var hashedPassword = PasswordHasher(dto.Password);
             var newEntity = _mapper.Map<User>(dto);
             var currentAccount = GetCurrentAccount();
             newEntity.CreatedBy = currentAccount.Result.Email;
+            newEntity.Password = hashedPassword;
             newEntity.CreatedDate = DateTime.Now;
             newEntity.RoleId = 1;
             await _userRepository.AddAsync(newEntity);
@@ -68,9 +99,15 @@ namespace EventMate.Service.Service
 
         public async Task<CustomResponse<NoContentResponse>> AddParticipantAsync(UserCreateDto dto)
         {
+            if (await EmailVerifierAsync(dto.Email))
+            {
+                return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status400BadRequest, "The e-mail address is registered in the system. Please try another e-mail address.");
+            }
+            var hashedPassword = PasswordHasher(dto.Password);
             var newEntity = _mapper.Map<User>(dto);
             var currentAccount = GetCurrentAccount();
             newEntity.CreatedBy = currentAccount.Result.Email;
+            newEntity.Password = hashedPassword;
             newEntity.CreatedDate = DateTime.Now;
             newEntity.RoleId = 3;
             await _userRepository.AddAsync(newEntity);
@@ -83,9 +120,15 @@ namespace EventMate.Service.Service
         }
         public async Task<CustomResponse<NoContentResponse>> AddPersonnelAsync(UserCreateDto dto)
         {
+            if (await EmailVerifierAsync(dto.Email))
+            {
+                return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status400BadRequest, "The e-mail address is registered in the system. Please try another e-mail address.");
+            }
+            var hashedPassword = PasswordHasher(dto.Password);
             var newEntity = _mapper.Map<User>(dto);
             var currentAccount = GetCurrentAccount();
             newEntity.CreatedBy = currentAccount.Result.Email;
+            newEntity.Password = hashedPassword;
             newEntity.CreatedDate= DateTime.Now;
             newEntity.RoleId = 2;
             await _userRepository.AddAsync(newEntity);
@@ -98,10 +141,12 @@ namespace EventMate.Service.Service
         }
         public UserDto Authenticate(TokenRequest userLogin)
         {
-            var currentAccount = _userRepository.Where(o => o.Email.ToLower() == userLogin.Email.ToLower() && o.Password == userLogin.Password).FirstOrDefault();
 
+            var currentAccount = _userRepository.Where(o => o.Email.ToLower() == userLogin.Email.ToLower()).FirstOrDefault();
 
-            if (currentAccount is not null)
+            var isValidPassword = PasswordVerifier(userLogin.Password, currentAccount.Password);
+
+            if (currentAccount != null && isValidPassword == true)
             {
                 var refObj = _unitOfWork.RoleRepository.Where(x => x.Id == currentAccount.RoleId).FirstOrDefault();
 
@@ -168,7 +213,6 @@ namespace EventMate.Service.Service
         public async Task<TokenDto> Login(TokenRequest userLogin)
         {
             var userDto = Authenticate(userLogin);
-
             if (userDto != null)
             {
                 var user = _userRepository.Where(x => x.Id == userDto.Id).FirstOrDefault();
@@ -222,6 +266,48 @@ namespace EventMate.Service.Service
                 return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
             }
             return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status404NotFound, $" {typeof(User).Name} ({userUpdateDto.Id}) not found. Updete operation is not successfull. ");
+        }
+
+        public async Task<CustomResponse<NoContentResponse>> Logout()
+        {
+            var identity = _contextAccessor.HttpContext.User.Identity as ClaimsIdentity;
+
+            if (identity != null)
+            {
+                var userClaims = identity.Claims;
+                string accountEmail = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email)?.Value;
+                var user = _userRepository.Where(x => x.Email == accountEmail).FirstOrDefault();
+
+                //var user = _userRepository.Where(x => x.RefreshToken == refreshToken).FirstOrDefault();
+                if (user != null && user.RefreshToken != null)
+                {
+                    user.RefreshToken = null;
+                    user.RefreshTokenExpireDate = null;
+                    user.LastActivity = DateTime.Now;
+                    _userRepository.Update(user);
+                    await _unitOfWork.CommitAsync();
+
+                    var claimTypesToDelete = new List<string>
+                {
+                    ClaimTypes.Email,
+                    ClaimTypes.Name,
+                    ClaimTypes.Surname,
+                    ClaimTypes.Role
+                };
+
+
+
+                    foreach (var claim in identity.Claims.ToList())
+                    {
+                        identity.RemoveClaim(claim);
+                    }
+                    await _contextAccessor.HttpContext.SignOutAsync();
+
+                    return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
+                }
+            }
+            return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status404NotFound, "  No active session found. ");
+
         }
     }
 }

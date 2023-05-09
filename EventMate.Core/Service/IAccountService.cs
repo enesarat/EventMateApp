@@ -24,6 +24,8 @@ namespace EventMate.Core.Service
         UserDto Authenticate(TokenRequest userLogin);
         TokenDto GenerateToken(UserDto user);
         Task<TokenDto> Login(TokenRequest userLogin);
+        Task<CustomResponse<NoContentResponse>> Logout();
+
         Task<TokenDto> RefreshToken(string tokenStr);
         Task<ActiveAccountDto> GetCurrentAccount();
     }
