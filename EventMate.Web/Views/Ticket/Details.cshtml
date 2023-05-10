@@ -1,0 +1,28 @@
+﻿@model TicketDto
+@{
+    ViewData["Title"] = "Category Detail";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h1>Ticket Details</h1>
+            <dl class="row">
+                <dt class="col-sm-3">ID</dt>
+                <dd class="col-sm-9">@Model.Id</dd>
+
+                <dt class="col-sm-3">User</dt>
+                <dd class="col-sm-9">@Model.Event</dd>
+
+                <dt class="col-sm-3">Event</dt>
+                <dd class="col-sm-9">@Model.User</dd>
+
+                <dt class="col-sm-3">IdentifiedTicketNumber</dt>
+                <dd class="col-sm-9">@Model.IdentifiedTicketNumber</dd>
+            </dl>
+
+            <a asp-action="Edit" asp-controller="Ticket" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+            <a asp-action="Delete" asp-controller="Ticket" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+</div>

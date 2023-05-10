@@ -21,7 +21,7 @@ namespace EventMate.Service.Mapper
         {
             CreateMap<Category,CategoryDto>().ReverseMap();
             CreateMap<CategoryCreateDto,Category>();
-            CreateMap<CategoryUpdateDto,Category>();
+            CreateMap<CategoryUpdateDto,Category>().ReverseMap();
 
             CreateMap<EventCreateDto, Event>();
             CreateMap<EventUpdateDto, Event>();

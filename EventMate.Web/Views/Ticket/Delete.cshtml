@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model TicketDto
+
+<h2>Delete Ticket</h2>
+
+<p>Are you sure you want to delete this ticket?</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="User"></label>
+        <input asp-for="User" class="form-control" disabled />
+
+        <label asp-for="Event"></label>
+        <input asp-for="Event" class="form-control" disabled />
+
+        <label asp-for="IdentifiedTicketNumber"></label>
+        <input asp-for="IdentifiedTicketNumber" class="form-control" disabled />
+    </div>
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
