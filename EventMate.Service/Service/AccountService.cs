@@ -96,7 +96,6 @@ namespace EventMate.Service.Service
             newDto.Role = refObj.Name;
             return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
         }
-
         public async Task<CustomResponse<NoContentResponse>> AddParticipantAsync(UserCreateDto dto)
         {
             if (await EmailVerifierAsync(dto.Email))

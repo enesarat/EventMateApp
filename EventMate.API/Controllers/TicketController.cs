@@ -37,6 +37,11 @@ namespace EventMate.API.Controllers
         {
             return CustomActionResult(await _service.AddAsync(ticketCreateDto, _contextAccessor.HttpContext));
         }
+        [HttpGet("VerifyTicket")]
+        public async Task<IActionResult> VerifyTicket([FromQuery]string ticketNumber)
+        {
+            return CustomActionResult(await _service.VerifyTicket(ticketNumber));
+        }
 
         [HttpPut]
         [ServiceFilter(typeof(CreateDateSafetyFilter<Ticket, TicketUpdateDto>))]

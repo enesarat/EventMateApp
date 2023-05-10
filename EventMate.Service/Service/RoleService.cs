@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EventMate.Core.DTO.Concrete.Category;
+using EventMate.Core.DTO.Concrete.City;
 using EventMate.Core.DTO.Concrete.Response;
 using EventMate.Core.DTO.Concrete.Role;
 using EventMate.Core.Model.Concrete;
@@ -27,6 +28,10 @@ namespace EventMate.Service.Service
 
         public async Task<CustomResponse<NoContentResponse>> AddAsync(RoleCreateDto roleCreateDto)
         {
+            if (await RoleVerifier(roleCreateDto.Name))
+            {
+                return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status400BadRequest, "This role name is registered in the system. Please specify another role name.");
+            }
             var item = _mapper.Map<Role>(roleCreateDto);
             item.CreatedDate = DateTime.Now;
             item.CreatedBy = "SYSTEM";
@@ -35,7 +40,14 @@ namespace EventMate.Service.Service
 
             return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
         }
-
+        public async Task<bool> RoleVerifier(string name)
+        {
+            if (await _roleRepository.AnyAsync(x => x.Name == name))
+            {
+                return true;
+            }
+            return false;
+        }
         public async Task<CustomResponse<NoContentResponse>> UpdateAsync(RoleUpdateDto roleUpdateDto)
         {
             if (await _roleRepository.AnyAsync(x => x.Id == roleUpdateDto.Id && x.IsActive == true))

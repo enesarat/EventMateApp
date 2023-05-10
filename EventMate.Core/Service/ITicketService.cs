@@ -19,5 +19,6 @@ namespace EventMate.Core.Service
         public Task<CustomResponse<IEnumerable<TicketDto>>> GetTicketsWithDetailsAsync();
         public Task<CustomResponse<TicketDto>> GetTicketWithDetailAsync(int id);
         Task<ActiveAccountDto> GetCurrentAccount(HttpContext context);
+        Task<CustomResponse<TicketVerifyDto>> VerifyTicket(string ticketNumber);
     }
 }

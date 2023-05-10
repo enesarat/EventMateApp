@@ -111,7 +111,27 @@ namespace EventMate.Service.Service
                 return null;
             }
         }
-
+        public async Task<CustomResponse<TicketVerifyDto>> VerifyTicket(string ticketNumber)
+        {
+            var ticket = _ticketRepository.Where(x => x.IdentifiedTicketNumber == ticketNumber).FirstOrDefaultAsync().Result;
+            if (ticket!=null)
+            {
+                var owner = _userRepository.Where(o => o.Id == ticket.UserId).FirstOrDefaultAsync().Result;
+                if (owner!=null)
+                {
+                    TicketVerifyDto ticketVerify = new TicketVerifyDto()
+                    {
+                        TicketValidity = true,
+                        Email = owner.Email,
+                        Name = owner.Name,
+                        Surname = owner.Surname
+                    };
+                    return CustomResponse<TicketVerifyDto>.Success(StatusCodes.Status200OK, ticketVerify);
+                }
+                return CustomResponse<TicketVerifyDto>.Fail(StatusCodes.Status404NotFound, " No user found for which the ticket is registered. ");
+            }
+            return CustomResponse<TicketVerifyDto>.Fail(StatusCodes.Status404NotFound, " No ticket record found in the system. ");
+        }
         private async Task<bool> TicketValidationChecker(TicketCreateDto ticketCreateDto)
         {
             var ticketValidator = await _ticketRepository.AnyAsync(x => x.IdentifiedTicketNumber == ticketCreateDto.IdentifiedTicketNumber);

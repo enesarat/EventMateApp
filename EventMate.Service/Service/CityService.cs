@@ -27,6 +27,10 @@ namespace EventMate.Service.Service
 
         public async Task<CustomResponse<NoContentResponse>> AddAsync(CityCreateDto cityCreateDto)
         {
+            if (await CityVerifier(cityCreateDto.Name))
+            {
+                return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status400BadRequest, "This city name is registered in the system. Please specify another city name.");
+            }
             var item = _mapper.Map<City>(cityCreateDto);
             item.CreatedDate = DateTime.Now;
             item.CreatedBy = "SYSTEM";
@@ -35,7 +39,14 @@ namespace EventMate.Service.Service
 
             return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
         }
-
+        public async Task<bool> CityVerifier(string name)
+        {
+            if (await _cityRepository.AnyAsync(x => x.Name == name))
+            {
+                return true;
+            }
+            return false;
+        }
         public async Task<CustomResponse<NoContentResponse>> UpdateAsync(CityUpdateDto cityUpdateDto)
         {
             if (await _cityRepository.AnyAsync(x => x.Id == cityUpdateDto.Id && x.IsActive == true))

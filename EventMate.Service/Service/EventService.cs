@@ -176,7 +176,7 @@ namespace EventMate.Service.Service
         public async Task<CustomResponse<List<EventDto>>> GetFilteredEventsAsync(EventFilter filter)
         {
             var status = await FilterValidator(filter);
-            if (status)
+            if (!status)
             {
                 var query = _eventRepository.GetEventsWithDetails().Result.AsQueryable();
 
@@ -207,14 +207,14 @@ namespace EventMate.Service.Service
 
         private async Task<bool> FilterValidator(EventFilter filter)
         {
-            bool dateValidator = false;
-            bool categoryValidator = false;
-            bool cityValidator = false;
+            bool dateValidator = true;
+            bool categoryValidator = true;
+            bool cityValidator = true;
 
             if (filter.StartDate.HasValue)
             {
                 dateValidator = await _eventRepository.AnyAsync(x => x.StartDate.Date == filter.StartDate.Value.Date);
-                if (dateValidator)
+                if (!dateValidator)
                 {
                     errorMessage = errorMessage + " No events found on the specified date. ";
                 }
@@ -237,7 +237,7 @@ namespace EventMate.Service.Service
             }
             
 
-            if (dateValidator == false && categoryValidator == true && cityValidator == true)
+            if (dateValidator == false || categoryValidator == false || cityValidator == false)
             {
                 return true;
             }

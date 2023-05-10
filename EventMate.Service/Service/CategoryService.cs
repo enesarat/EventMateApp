@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace EventMate.Service.Service
 {
-    public class CategoryService : GenericService<Category,CategoryDto>, ICategoryService
+    public class CategoryService : GenericService<Category, CategoryDto>, ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
 
@@ -26,6 +26,10 @@ namespace EventMate.Service.Service
 
         public async Task<CustomResponse<NoContentResponse>> AddAsync(CategoryCreateDto categoryCreateDto)
         {
+            if (await CategoryVerifier(categoryCreateDto.Name))
+            {
+                return CustomResponse<NoContentResponse>.Fail(StatusCodes.Status400BadRequest, "This category name is registered in the system. Please specify another category name.");
+            }
             var item = _mapper.Map<Category>(categoryCreateDto);
             item.CreatedDate = DateTime.Now;
             item.CreatedBy = "SYSTEM";
@@ -34,7 +38,14 @@ namespace EventMate.Service.Service
 
             return CustomResponse<NoContentResponse>.Success(StatusCodes.Status204NoContent);
         }
-
+        public async Task<bool> CategoryVerifier(string name)
+        {
+            if (await _categoryRepository.AnyAsync(x => x.Name == name))
+            {
+                return true;
+            }
+            return false;
+        }
         public async Task<CustomResponse<NoContentResponse>> UpdateAsync(CategoryUpdateDto categoryUpdateDto)
         {
             if (await _categoryRepository.AnyAsync(x => x.Id == categoryUpdateDto.Id && x.IsActive == true))
