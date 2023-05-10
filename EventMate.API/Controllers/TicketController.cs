@@ -1,4 +1,5 @@
 ﻿using EventMate.API.Filters;
+using EventMate.Core.DTO.Concrete.Category;
 using EventMate.Core.DTO.Concrete.Event;
 using EventMate.Core.DTO.Concrete.Ticket;
 using EventMate.Core.Model.Concrete;
@@ -45,6 +46,8 @@ namespace EventMate.API.Controllers
 
         [HttpPut]
         [ServiceFilter(typeof(CreateDateSafetyFilter<Ticket, TicketUpdateDto>))]
+        [ServiceFilter(typeof(CreatedBySafetyFilter<Ticket, TicketUpdateDto>))]
+        [ServiceFilter(typeof(UpdateTicketNumSafetyFilter<Ticket, TicketUpdateDto>))]
         public async Task<IActionResult> Update([FromBody] TicketUpdateDto ticketUpdateDto)
         {
             return CustomActionResult(await _service.UpdateAsync(ticketUpdateDto));

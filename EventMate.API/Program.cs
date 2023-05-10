@@ -122,6 +122,10 @@ builder.Services.AddScoped<CreateDateSafetyFilter<Event, EventUpdateDto>>();
 builder.Services.AddScoped<CreateDateSafetyFilter<Ticket, TicketUpdateDto>>();
 #endregion
 
+#region Update TicketNum Safety Filter Definitions
+builder.Services.AddScoped<UpdateTicketNumSafetyFilter<Ticket, TicketUpdateDto>>();
+#endregion
+
 #region StartDate Filter Definitions
 builder.Services.AddScoped<StartDateSafetyFilter<Event, EventUpdateDto>>();
 #endregion

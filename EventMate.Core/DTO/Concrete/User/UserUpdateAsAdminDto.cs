@@ -15,5 +15,6 @@ namespace EventMate.Core.DTO.Concrete.User
         public string Password { get; set; }
         public int RoleId { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

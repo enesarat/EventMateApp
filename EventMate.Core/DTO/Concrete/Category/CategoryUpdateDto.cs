@@ -11,6 +11,7 @@ namespace EventMate.Core.DTO.Concrete.Category
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
 
     }
 }

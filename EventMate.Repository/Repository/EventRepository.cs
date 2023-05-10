@@ -31,7 +31,14 @@ namespace EventMate.Repository.Repository
         public async Task UpdateQuotaAfterSale(int id)
         {
             var _event =await  _context.Events.FindAsync(id);
-            _event.Quota = -1;
+            if (_event.Quota > 0)
+            {
+                _event.Quota -= 1;
+            }
+            else
+            {
+                throw new Exception(" Unable to register because the quota is full. ");
+            }
             _context.Events.Update(_event);
         }
     }

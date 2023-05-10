@@ -37,6 +37,7 @@ namespace EventMate.API.Controllers
 
         [HttpPut]
         [ServiceFilter(typeof(CreateDateSafetyFilter<City, CityUpdateDto>))]
+        [ServiceFilter(typeof(CreatedBySafetyFilter<City, CityUpdateDto>))]
         public async Task<IActionResult> Update([FromBody] CityUpdateDto cityUpdateDto)
         {
             return CustomActionResult(await _service.UpdateAsync(cityUpdateDto));
